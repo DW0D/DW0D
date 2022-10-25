@@ -1,0 +1,5 @@
+- 👋 Hi, I’m @DW0D
+- 👀 I’m interested in single-player games, action-packed movies and horror/thriller books
+- 🌱 I’m currently learning software engineering at the University of Bolton
+- 💞️ I’m looking to collaborate on C# code to build programs and develop my knowledge
+- 📫 Instagram: alfie_dwod
