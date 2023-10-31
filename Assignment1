@@ -1,0 +1,75 @@
+import os
+import msvcrt
+
+# Define the correct password
+correct_password = "Password1"
+max_attempts = 3
+failed_attempts = 0
+
+def login():
+    global failed_attempts
+    entered_chars = []
+    print("Enter your password:")
+
+    while True:
+        char = msvcrt.getwch()
+
+        if char == '\r':
+            entered_password = ''.join(entered_chars)
+            break
+        elif char == '\b':
+            if entered_chars:
+                entered_chars.pop()
+                print('\b \b', end='', flush=True)
+        else:
+            entered_chars.append(char)
+            print('*', end='', flush=True)
+
+    print()
+
+    if entered_password == correct_password:
+        print("Password accepted. Press any key to continue...")
+        msvcrt.getwch()
+        return True
+    else:
+        failed_attempts += 1
+        if failed_attempts >= max_attempts:
+            print("Too many failed attempts. Try again later.")
+            exit(1)
+        else:
+            print("Incorrect password. Access denied. Attempts remaining:", max_attempts - failed_attempts)
+        return False
+
+def main_menu():
+    options = ["Product Management", "Inventory Management", "Sales and Transactions", "Reports", "Exit"]
+    selected_option = 0
+
+    while True:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print("Main Menu:")
+        for i, option in enumerate(options):
+            if i == selected_option:
+                print(f"> {option}")
+            else:
+                print(f"  {option}")
+
+        char = msvcrt.getwch()
+
+        if char == '\r':
+            if selected_option == len(options) - 1:
+                break
+            else:
+                print(f"Selected: {options[selected_option]}.")
+                msvcrt.getwch()
+                # Implement the functionality for the selected option here
+        elif char == b'\xe0':  # Arrow key
+            char = msvcrt.getwch()
+            if char == 'H' and selected_option > 0:
+                selected_option -= 1
+            elif char == 'P' and selected_option < len(options) - 1:
+                selected_option += 1
+
+while not login():
+        pass  # Keep looping until a successful login
+
+main_menu()
